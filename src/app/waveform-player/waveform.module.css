@@ -1,0 +1,198 @@
+.playerContainer {
+    display: flex;
+    flex-direction: column; /* Stack player and playlist vertically */
+    align-items: center;
+    justify-content: center;
+    /* background: rgba(34, 34, 34, 0.7); Semi-transparent */
+    padding: 10px;
+    width: 100%;
+    gap: 10px; /* Reduced gap for tighter layout */
+  }
+  
+  .player {
+    width: 550px;
+    text-align: center;
+  }
+  
+  .player h2 {
+    font-size: 32px;
+    margin: 0 0 10px;
+    color: #ff55ff;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .error {
+    color: #ff4444;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  .time {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .waveform {
+    width: 100%;
+    height: 80px;
+    margin: 10px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .controls {
+    margin: 10px 0;
+  }
+  
+  .controls button {
+    background: rgba(51, 51, 51, 0.7); /* Semi-transparent */
+    color: #ff55ff;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+  }
+  
+  .controls button:hover {
+    background: rgba(85, 85, 85, 0.6); /* Slightly less transparent */
+  }
+  
+  .playlist {
+    background: rgba(34, 34, 34, 0.7); /* Semi-transparent */
+    padding: 10px;
+    max-height: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    width: 550px; /* Match player width for consistency */
+    min-width: 250px; /* Minimum width for smaller screens */
+  }
+  
+  .playlist h3 {
+    margin: 0 0 10px;
+    color: #ff55ff;
+    font-size: 24px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .playlistTable {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .playlistTable th,
+  .playlistTable td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+  }
+  
+  .playlistTable th {
+    background: rgba(51, 51, 51, 0.7); /* Semi-transparent */
+    color: #ff55ff;
+  }
+  
+  .playlistTable tr {
+    background: rgba(51, 51, 51, 0.5); /* Semi-transparent */
+    cursor: pointer;
+  }
+  
+  .playlistTable tr:hover {
+    background: rgba(85, 85, 85, 0.6); /* Slightly less transparent on hover */
+  }
+  
+  .playlistTable tr.active {
+    background: rgba(68, 68, 68, 0.7); /* Slightly more opaque for active */
+  }
+  
+  .playlistTable tbody {
+    display: block;
+    max-height: 270px; /* Height for 5 items (approx 40px each) */
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .playlistTable thead,
+  .playlistTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .playlistTable th:first-child,
+  .playlistTable td:first-child {
+    width: 30px; /* Track number column */
+  }
+  
+  .playlistTable th:last-child,
+  .playlistTable td:last-child {
+    width: 70px; /* Duration column */
+  }
+  
+  @media (max-width: 768px) {
+    .playerContainer {
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+    }
+  
+    .player {
+      width: 100%;
+      max-width: 90vw;
+    }
+  
+    .player h2 {
+      font-size: 14px;
+    }
+  
+    .waveform {
+      height: 60px;
+    }
+  
+    .time {
+      font-size: 12px;
+    }
+  
+    .controls button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  
+    .playlist {
+      width: 100%;
+      max-width: 90vw;
+    }
+  
+    .playlist h3 {
+      font-size: 14px;
+    }
+  
+    .playlistTable {
+      font-size: 12px;
+    }
+  
+    .playlistTable th,
+    .playlistTable td {
+      padding: 6px;
+    }
+  
+    .playlistTable tbody {
+      max-height: 120px; /* Height for 3 items (approx 40px each) */
+    }
+  
+    .playlistTable th:first-child,
+    .playlistTable td:first-child {
+      width: 25px;
+    }
+  
+    .playlistTable th:last-child,
+    .playlistTable td:last-child {
+      width: 60px;
+    }
+  }

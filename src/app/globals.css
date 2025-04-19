@@ -1,21 +1,178 @@
 :root {
-  background-color: #181818;
-  color: rgba(255, 255, 255, 0.87);
-  color-scheme: light dark;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-synthesis: none;
+  background-color: #f2f2f2;
+  color: #ffffff;
+  color-scheme: dark;
+  font-family: 'Courier New', monospace;
   font-weight: 400;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    background-color: #f8f8f8;
-    color: #181818;
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 1000px;
+  height: auto;
+  gap: 10px;
+  z-index: 10;
+}
+
+.web3Section {
+  background: #222222;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.web3Section h2 {
+  margin: 0 0 10px;
+  color: #ff5500;
+  font-size: 18px;
+}
+
+.web3Section .status {
+  background: #333333;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.web3Section .status p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.web3Section .nftStatus {
+  color: #ff5500;
+  font-weight: bold;
+}
+
+.web3Section button {
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.web3Section button:hover {
+  background: #555555;
+}
+
+.error {
+  color: #ff4444;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.walletPopup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.walletPopupContent {
+  background: #222222;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  width: 300px;
+  text-align: center;
+}
+
+.walletPopupContent h2 {
+  color: #ff5500;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.walletPopupContent button {
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  width: 100%;
+}
+
+.walletPopupContent button:hover {
+  background: #555555;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    top: 0;
+    transform: translate(-50%, 0);
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+
+  .web3Section {
+    padding: 8px;
+  }
+
+  .web3Section h2 {
+    font-size: 16px;
+  }
+
+  .web3Section .status p {
+    font-size: 12px;
+  }
+
+  .web3Section button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .walletPopupContent {
+    width: 80%;
+    padding: 15px;
+  }
+
+  .walletPopupContent h2 {
+    font-size: 16px;
+  }
+
+  .walletPopupContent button {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
