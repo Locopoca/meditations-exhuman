@@ -98,7 +98,7 @@ export default function WaveformPlayer() {
         cursorWidth: 1,
         height: 80,
         backend: 'MediaElement',
-        responsive: true,
+        // responsive: true,
         normalize: true
       })
 

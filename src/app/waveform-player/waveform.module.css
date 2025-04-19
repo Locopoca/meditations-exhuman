@@ -7,12 +7,48 @@
     padding: 10px;
     width: 100%;
     gap: 10px; /* Reduced gap for tighter layout */
+    cursor: crosshair;
   }
   
   .player {
     width: 550px;
     text-align: center;
   }
+
+
+/* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
+.playlistTable tbody::-webkit-scrollbar {
+    width: 8px; /* Scrollbar width */
+    overflow-y: scroll;
+  }
+  
+  .playlistTable tbody::-webkit-scrollbar-track {
+    background: rgba(51, 51, 51, 0.5); /* Semi-transparent track */
+  }
+  
+  .playlistTable tbody::-webkit-scrollbar-thumb {
+    background: #ff55ff; /* Accent color for thumb */
+    overflow-y: scroll;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  }
+  
+  .playlistTable tbody::-webkit-scrollbar-thumb:hover {
+    background: #ff7700; /* Slightly lighter on hover */
+  }
+  .playlistTable tbody {
+    /* display: block; */
+    max-height: 200px; /* Height for 5 items (approx 40px each) */
+    overflow-y: scroll; /* Force scrollbar to always be visible */
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom Scrollbar for Firefox */
+  .playlistTable tbody {
+    scrollbar-width: thin; /* Thin scrollbar */
+    overflow-y: scroll;
+    scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
+  }
+  
   
   .player h2 {
     font-size: 32px;
@@ -79,6 +115,7 @@
   }
   
   .playlistTable {
+    cursor: crosshair;
     width: 100%;
     border-collapse: collapse;
     color: #ffffff;
@@ -132,7 +169,7 @@
   
   .playlistTable th:last-child,
   .playlistTable td:last-child {
-    width: 70px; /* Duration column */
+    width: 120px; /* Duration column */
   }
   
   @media (max-width: 768px) {
@@ -194,5 +231,39 @@
     .playlistTable th:last-child,
     .playlistTable td:last-child {
       width: 60px;
+    }
+  }
+
+  .playlistTable tbody::-webkit-scrollbar-thumb {
+    background: #ff55ff; /* Thumb color */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  }
+  
+  .playlistTable tbody::-webkit-scrollbar-thumb:hover {
+    background: #ff77ff; /* Slightly lighter on hover */
+  }
+  
+  /* Custom Scrollbar for Firefox */
+  .playlistTable tbody {
+    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
+  }
+  
+  @media (max-width: 768px) {
+    .playlistTable tbody {
+      max-height: 120px; /* Height for 3 items (approx 40px each) */
+      overflow-y: scroll; /* Force scrollbar to always be visible */
+      -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    }
+  
+    /* Adjust scrollbar for mobile */
+    .playlistTable tbody::-webkit-scrollbar {
+      width: 6px; /* Slightly thinner for mobile */
+      display: block; /* Force scrollbar visibility */
+    }
+  
+    .playlistTable tbody {
+      scrollbar-width: thin;
+      scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5);
     }
   }
