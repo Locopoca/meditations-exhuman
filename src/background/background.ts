@@ -95,7 +95,8 @@ export function initBackground() {
           float h = rn> .0 ? .5:length(p)-.01-gy*.05+rn*.02;
           
           g+=e= max(.001+op.z*.000002, abs(h));
-          col+=vec3(.25,.25,1.+abs(rn))*(0.025+(.02*exp(5.*fract(gy+u_time))))/exp(e*e*i);
+          // Modified color to incorporate pink (base) and gold (highlight)
+          col+=mix(vec3(1.0, 0.75, 0.8), vec3(1.0, 0.84, 0.0), abs(rn))*(0.025+(.02*exp(5.*fract(gy+u_time))))/exp(e*e*i);
         }
         
         col*=exp(-.07*g);

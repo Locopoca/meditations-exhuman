@@ -3,7 +3,7 @@
     flex-direction: column; /* Stack player and playlist vertically */
     align-items: center;
     justify-content: center;
-    /* background: rgba(34, 34, 34, 0.7); Semi-transparent */
+    /* background: rgba(34, 34, 34, 0.7); */
     padding: 10px;
     width: 100%;
     gap: 10px; /* Reduced gap for tighter layout */
@@ -23,13 +23,13 @@
   }
   
   .playlistTable tbody::-webkit-scrollbar-track {
-    background: rgba(51, 51, 51, 0.5); /* Semi-transparent track */
+    background: rgba(51, 51, 51, 1); /* Semi-transparent track */
   }
   
   .playlistTable tbody::-webkit-scrollbar-thumb {
-    background: #ff55ff; /* Accent color for thumb */
+    background: #ffffff; /* Accent color for thumb */
     overflow-y: scroll;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border: 1px solid rgba(255, 255, 255, 1); /* Subtle border */
   }
   
   .playlistTable tbody::-webkit-scrollbar-thumb:hover {
@@ -46,14 +46,15 @@
   .playlistTable tbody {
     scrollbar-width: thin; /* Thin scrollbar */
     overflow-y: scroll;
-    scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
+    scrollbar-color: #ffffff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
   }
   
   
   .player h2 {
     font-size: 32px;
     margin: 0 0 10px;
-    color: #ff55ff;
+    color: #FFD700;
+    text-shadow: #fc0 1px 0 10px;
     font-family: 'Courier New', monospace;
   }
   
@@ -66,7 +67,8 @@
   .time {
     font-size: 14px;
     margin: 10px 0;
-    color: #ffffff;
+    color: #FFD700;
+    text-shadow: #fc0 1px 0 10px;
     font-family: 'Courier New', monospace;
   }
   
@@ -84,7 +86,7 @@
   
   .controls button {
     background: rgba(51, 51, 51, 0.7); /* Semi-transparent */
-    color: #ff55ff;
+    color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
     padding: 8px 16px;
     margin: 0 5px;
@@ -92,6 +94,8 @@
     font-family: 'Courier New', monospace;
     font-size: 14px;
   }
+
+  
   
   .controls button:hover {
     background: rgba(85, 85, 85, 0.6); /* Slightly less transparent */
@@ -109,7 +113,7 @@
   
   .playlist h3 {
     margin: 0 0 10px;
-    color: #ff55ff;
+    color: #fff;
     font-size: 24px;
     font-family: 'Courier New', monospace;
   }
@@ -132,7 +136,7 @@
   
   .playlistTable th {
     background: rgba(51, 51, 51, 0.7); /* Semi-transparent */
-    color: #ff55ff;
+    color: #ffffff;
   }
   
   .playlistTable tr {
@@ -235,7 +239,7 @@
   }
 
   .playlistTable tbody::-webkit-scrollbar-thumb {
-    background: #ff55ff; /* Thumb color */
+    background: #ffffff; /* Thumb color */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
   }
   
@@ -246,7 +250,7 @@
   /* Custom Scrollbar for Firefox */
   .playlistTable tbody {
     scrollbar-width: thin; /* Thin scrollbar */
-    scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
+    scrollbar-color: #ffffff rgba(51, 51, 51, 0.5); /* Thumb and track colors */
   }
   
   @media (max-width: 768px) {
@@ -264,6 +268,6 @@
   
     .playlistTable tbody {
       scrollbar-width: thin;
-      scrollbar-color: #ff55ff rgba(51, 51, 51, 0.5);
+      scrollbar-color: #ffffff rgba(51, 51, 51, 0.5);
     }
   }

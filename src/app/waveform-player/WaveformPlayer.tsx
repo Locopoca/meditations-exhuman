@@ -90,15 +90,14 @@ export default function WaveformPlayer() {
     if (waveformContainerRef.current) {
       waveformRef.current = WaveSurfer.create({
         container: waveformContainerRef.current,
-        waveColor: 'rgb(200, 0, 200)',
-        progressColor: 'rgb(100, 0, 100)',
+        waveColor: '#fff',
+        progressColor: 'rgb(199, 163, 1)',
         cursorColor: '#fff',
         barWidth: 2,
         barRadius: 0,
-        cursorWidth: 1,
+        cursorWidth: 2,
         height: 80,
         backend: 'MediaElement',
-        // responsive: true,
         normalize: true
       })
 

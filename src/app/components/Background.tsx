@@ -34,85 +34,81 @@ export default function Background() {
           vec3 id;
           float d;
         } gr;
-
+  
+        #define FBI floatBitsToInt
+        #define FFBI(a) FBI(cos(a))^FBI(a)
+  
         uniform vec2 u_mouse;
         uniform vec2 u_resolution;
         uniform float u_time;
-
-        // Simplified hash function for better performance
-        float hash(vec3 uv) {
-          return fract(sin(dot(uv, vec3(12.9898, 78.233, 45.5432))) * 43758.5453);
+  
+        float hash(vec3 uv){
+          int x = FFBI(uv.x);
+          int y = FFBI(uv.y);
+          int z = FFBI(uv.z);
+          return float((x*x+y)*(y*y-x)*(z*z+x))/2.14e9;
         }
-
-        void dogrid(vec3 ro, vec3 rd, float size) {
-          gr.id = (floor(ro + rd * 1E-3) / size + 0.5) * size;
-          vec3 src = -(ro - gr.id) / rd;
-          vec3 dst = abs(0.5 * size) / abs(rd);
-          vec3 bz = src + dst;
-          gr.d = min(bz.x, min(bz.y, bz.z));
+  
+        void dogrid(vec3 ro,vec3 rd,float size){
+          gr.id = (floor(ro+rd*1E-3)/size+.5)*size;
+          vec3 src = -(ro-gr.id)/rd;
+          vec3 dst = abs(.5*size)/rd;
+          vec3 bz = src+dst;
+          gr.d = min(bz.x,min(bz.y,bz.z));
         }
-
-        vec3 erot(vec3 p, vec3 ax, float t) {
-          return mix(dot(ax, p) * ax, p, cos(t)) + cross(ax, p) * sin(t);
+  
+        vec3 erot(vec3 p,vec3 ax,float t){
+          return mix(dot(ax,p)*ax,p,cos(t))+cross(ax,p)*sin(t);
         }
-
-        void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+  
+        void mainImage(out vec4 fragColor, in vec2 fragCoord)
+        {
           vec2 uv = (fragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+          // Adjust UV to center with the container (80% width, max 1000px)
+          float containerWidth = min(1000.0, u_resolution.x * 0.8); // Container width in pixels
+          float offsetX = (u_resolution.x - containerWidth) / (2.0 * u_resolution.y); // Center offset
+          uv.x -= offsetX;
           vec2 mouse = u_mouse / u_resolution.xy;
-
+          
           vec3 col = vec3(0.);
-          vec3 ro = vec3(0.4 + mouse.x * 7.0, 0.4 + mouse.y * .0, -5.);
-          vec3 rt = vec3(mouse.x * 2.0, mouse.y * 2.0, 0.);
-
-          vec3 z = normalize(rt - ro);
-          vec3 x = normalize(cross(z, vec3(0., -1., 0.)));
-          vec3 y = cross(z, x);
-          vec3 rd = mat3(x, y, z) * normalize(vec3(uv, 2.0));
-
-          float i, e, g;
+          vec3 ro = vec3(0.4 + mouse.x * 7.0, 0.4 + mouse.y * 7.0, -5.);
+          vec3 rt = vec3(mouse.x * 4.0, mouse.y * 4.0, 0.);
+          
+          vec3 z = normalize(rt-ro);
+          vec3 x = normalize(cross(z,vec3(0.,-1.,0.)));
+          vec3 y = cross(z,x);
+          vec3 rd = mat3(x,y,z)*normalize(vec3(uv,2.+tanh(hash(uv.xyy+u_time)*.5+10.*sin(u_time))));
+          
+          float i,e,g;
           float gridlen = 0.;
-
-          // Light pink base color (#ffb6c1)
-          vec3 baseColor = vec3(1.0, 0.7137, 0.7569); // RGB for #ffb6c1
-          // Gold highlight color (#ffd700)
-          vec3 highlightColor = vec3(1.0, 0.8431, 0.0); // RGB for #ffd700
-
-          for(i = 0., e = 0.01, g = 0.; i++ < 50.;) { // Reduced iterations from 99 to 50
-            vec3 p = ro + rd * g;
-            p = erot(p, normalize(sin(u_time * 0.33 + vec3(-0.6, 0.4, 0.2))), u_time * 0.071);
-            p.z += u_time * 0.7;
-
-            if(gridlen <= g) {
-              dogrid(p, rd, 1.);
-              gridlen += gr.d;
+          
+          for(i=0.,e=.01,g=0.;i++<99.;){
+            vec3 p = ro+rd*g;
+            vec3 oop=p;
+            p = erot(p,normalize(sin(u_time*.33+vec3(-.6,.4,.2))),u_time*.071);
+            p.z+=u_time*.7;
+            
+            vec3 op=p;       
+            if(gridlen <=g){
+              dogrid(p,rd,1.);
+              gridlen+=gr.d;
             }
-            p -= gr.id;
-            float gy = dot(sin(gr.id * 2.), cos(gr.id.zxy * 5.));
-            float rn = hash(gr.id + floor(u_time));
-            p.x += sin(rn) * 0.25;
-
-            float h = length(p) - 0.01 - gy * 0.05 + rn * 0.02;
-
-            g += e = max(0.001, abs(h));
-
-            // Holographic effect: Iridescent colors for bubbles
-            float intensity = 0.025 + (0.02 * exp(3. * fract(gy + u_time))); // Reduced exp factor
-            // Iridescent color shift
-            vec3 holoColor = 0.5 + 0.5 * vec3(
-              sin(u_time + gy + 0.0),
-              sin(u_time + gy + 2.0),
-              sin(u_time + gy + 4.0)
-            );
-            // Mix base color with holographic effect and gold highlights
-            vec3 bubbleColor = mix(baseColor, holoColor, intensity);
-            bubbleColor = mix(bubbleColor, highlightColor, intensity * 0.5);
-            col += bubbleColor * intensity / exp(e * e * i);
+            p-=gr.id;
+            float gy = dot(sin(gr.id*2.),cos(gr.id.zxy*5.));
+            float rn = hash(gr.id+floor(u_time));
+            p.x +=sin(rn)*.25;
+            
+            float h = rn> .0 ? .5:length(p)-.01-gy*.05+rn*.02;
+            
+            g+=e= max(.001+op.z*.000002, abs(h));
+            // Modified color to incorporate pink (base) and gold (highlight)
+            col+=mix(vec3(1.0, 0.75, 0.8), vec3(1.0, 0.84, 0.0), abs(rn))*(0.025+(.02*exp(5.*fract(gy+u_time))))/exp(e*e*i);
           }
-
-          col *= exp(-0.07 * g);
-          fragColor = vec4(sqrt(col), 1.0);
+          
+          col*=exp(-.07*g);
+          fragColor = vec4(sqrt(col),1.0);
         }
-
+  
         void main() {
           mainImage(gl_FragColor, gl_FragCoord.xy);
         }
