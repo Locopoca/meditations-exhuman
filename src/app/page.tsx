@@ -1,9 +1,9 @@
 'use client'
 
-import { useAccount, useConnect, useDisconnect, useReadContract } from 'wagmi'
+// import { useAccount, useConnect, useDisconnect, useReadContract } from 'wagmi'
 import WaveformPlayer from './waveform-player/WaveformPlayer'
 import Background from './components/Background'
-import { parseAbi } from 'viem'
+// import { parseAbi } from 'viem'
 import { useState } from 'react'
 
 export default function Home() {
