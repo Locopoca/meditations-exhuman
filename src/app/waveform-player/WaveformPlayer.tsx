@@ -42,31 +42,27 @@ export default function WaveformPlayer() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isPlaying])
 
-  // Two-finger scrolling for playlist
+  // Single-touch scrolling for playlist
   useEffect(() => {
     const playlistElement = playlistRef.current
     if (!playlistElement) return
 
-    let touchData = { touches: [], startY: 0 }
+    let touchData = { startY: 0 }
 
     const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        e.preventDefault()
-        const [touch1, touch2] = e.touches
-        touchData.touches = [touch1, touch2]
-        touchData.startY = (touch1.clientY + touch2.clientY) / 2
+      if (e.touches.length === 1) {
+        const touch = e.touches[0]
+        touchData.startY = touch.clientY
       }
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        e.preventDefault()
-        const [touch1, touch2] = e.touches
-        const currentY = (touch1.clientY + touch2.clientY) / 2
+      if (e.touches.length === 1) {
+        const touch = e.touches[0]
+        const currentY = touch.clientY
         const dy = touchData.startY - currentY
         playlistElement.scrollTop += dy
         touchData.startY = currentY
-        touchData.touches = [touch1, touch2]
       }
     }
 
