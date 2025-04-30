@@ -73,6 +73,9 @@ export default function Home() {
           </div>
         )} */}
         <WaveformPlayer />
+        <div>
+        <p>Gratitude address EVM: 0x9570921BFA7Fea8aA0F0d352f06AF7A88a25A9D6</p>
+        </div>
       </div>
     </>
   )
