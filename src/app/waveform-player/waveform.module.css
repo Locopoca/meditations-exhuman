@@ -179,8 +179,10 @@
   @media (max-width: 768px) {
     .playerContainer {
       flex-direction: column;
-      gap: 8px;
-      padding: 8px;
+      gap: 20px;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
     }
   
     .player {
@@ -189,7 +191,7 @@
     }
   
     .player h2 {
-      font-size: 14px;
+      font-size: 32px;
     }
   
     .waveform {
@@ -197,12 +199,13 @@
     }
   
     .time {
-      font-size: 12px;
+      font-size: 16px;
     }
   
     .controls button {
+      margin-top: 40px;
       padding: 6px 12px;
-      font-size: 12px;
+      font-size: 16px;
     }
   
     .playlist {
@@ -255,7 +258,7 @@
   
   @media (max-width: 768px) {
     .playlistTable tbody {
-      max-height: 120px; /* Height for 3 items (approx 40px each) */
+      max-height: 240px; /* Height for 3 items (approx 40px each) */
       overflow-y: scroll; /* Force scrollbar to always be visible */
       -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
     }
