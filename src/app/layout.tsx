@@ -11,8 +11,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Meditations Exhuman',
-  description: 'A Web3 audio meditation player',
+  title: 'Retreat Core',
+  description: 'A meditation series with @3xhuman, coded by @filt_mr',
   icons: {
     icon: '/favicon.ico'
   }
